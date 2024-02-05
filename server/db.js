@@ -12,4 +12,5 @@ const connection = async () => {
     console.error(error);
   }
 };
-connection();
+const conn = connection();
+module.exports = { conn };

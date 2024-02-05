@@ -1,10 +1,18 @@
 import React, { useState } from "react";
 import "./css/Login.css";
+import axios from "axios";
 const Login = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [role, setRole] = useState("student");
-  const handleSubmit = () => {};
+  axios.defaults.withCredentials = true;
+  const handleSubmit = () => {
+    axios
+      .post("http://localhost:3001/auth/login", { username, password, role })
+      .then((res) => console.log(res))
+      .catch((err) => console.error(err));
+  };
+
   return (
     <div className="login-page">
       <div className="login-container">
