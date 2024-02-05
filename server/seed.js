@@ -23,7 +23,6 @@ async function AdminAccount() {
       await newAdmin.save();
       console.log("Admin Account Created Successfully");
     } else {
-      console.log("Admin Account Already Exists");
     }
   } catch (error) {
     console.error(error);

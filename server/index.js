@@ -4,6 +4,7 @@ const { conn } = require("./db.js");
 const cors = require("cors");
 const cookieParser = require("cookie-parser");
 const { router } = require("./routes/Auth");
+const { studentrouter } = require("./routes/Student.js");
 const app = express();
 app.use(express.json());
 app.use(
@@ -16,6 +17,7 @@ app.use(cookieParser());
 dotenv.config();
 
 app.use("/auth", router);
+app.use("/student", studentrouter);
 app.listen(process.env.PORT, () => {
   console.log("Server is Running", process.env.PORT);
 });

@@ -4,6 +4,8 @@ import Navbar from "./components/Navbar";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Login from "./components/Login";
 import Books from "./components/Books";
+import Dashboard from "./components/Dashboard";
+import AddStudent from "./components/AddStudent";
 const App = () => {
   return (
     <BrowserRouter>
@@ -12,6 +14,8 @@ const App = () => {
         <Route path="/" element={<Home />}></Route>
         <Route path="/login" element={<Login />}></Route>
         <Route path="/books" element={<Books />}></Route>
+        <Route path="/dashboard" element={<Dashboard />}></Route>
+        <Route path="/addstudent" element={<AddStudent />}></Route>
       </Routes>
     </BrowserRouter>
   );

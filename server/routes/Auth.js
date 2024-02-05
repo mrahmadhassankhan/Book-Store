@@ -2,26 +2,57 @@ const express = require("express");
 const { adminModel } = require("../Models/Admin");
 const Jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
+const { studentModel } = require("../Models/Student");
 const router = express.Router();
 
 router.post("/login", async (req, res) => {
   const { username, password, role } = req.body;
-  if (role === "admin") {
-    const admin = await adminModel.findOne({ username });
-    if (!admin) {
-      res.json({ message: "Admin not registered" });
+
+  try {
+    if (role === "admin") {
+      const admin = await adminModel.findOne({ username });
+
+      if (!admin) {
+        return res.status(404).json({ message: "Admin not registered" });
+      }
+
+      const validPassword = await bcrypt.compare(password, admin.password);
+
+      if (!validPassword) {
+        return res.status(401).json({ message: "Wrong Password" });
+      }
+
+      const token = Jwt.sign(
+        { username: admin.username, role: "admin" },
+        process.env.ADMIN_KEY,
+        { expiresIn: "1h" } // Example: Set token expiration time
+      );
+
+      res.cookie("token", token, { httpOnly: true, secure: true });
+      return res.json({ login: true, role: "admin" });
     }
 
-    const validPassword = await bcrypt.compare(password, admin.password);
-    if (!validPassword) {
-      return res.json({ message: "Wrong Password" });
+    if (role === "student") {
+      const student = await studentModel.findOne({ username });
+
+      if (!student) {
+        return res.status(404).json({ message: "Student not found" });
+      }
+
+      const studentToken = Jwt.sign(
+        { username: student.username, role: "student" },
+        process.env.STUDENT_KEY,
+        { expiresIn: "1h" } // Example: Set token expiration time
+      );
+
+      res.cookie("token", studentToken, { httpOnly: true, secure: true });
+      return res.json({ login: true, role: "student" });
     }
-    const token = Jwt.sign(
-      { username: admin.username, role: "admin" },
-      process.env.ADMIN_KEY
-    );
-    res.cookie("token", token, { httpOnly: true, secure: true });
-    return res.json({ login: true, role: "admin" });
+
+    res.status(400).json({ message: "Invalid role" });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Internal Server Error" });
   }
 });
 

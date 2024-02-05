@@ -1,0 +1,58 @@
+.addstudent-page {
+  font-family: Arial, Helvetica, sans-serif;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 90vh;
+  background-color: black;
+  color: white;
+}
+
+.addstudent-container {
+  background-color: white;
+  border-radius: 8px;
+  padding: 20px;
+  width: 300px;
+}
+
+.addstudent-container h2,
+.form-group label {
+  color: rgba(0, 0, 0, 0.694);
+}
+
+.addstudent-container h2 {
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.addstudent-container .form-group {
+  margin-bottom: 15px;
+}
+.addstudent-container .form-group label {
+  display: block;
+  font-size: 14px;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.addstudent-container .form-group input,
+.addstudent-container .form-group select {
+  width: 100%;
+  padding: 8px;
+  box-sizing: border-box;
+  margin-top: 5px;
+}
+
+.addstudent-container .btn-register {
+  background-color: #4caf50;
+  color: white;
+  padding: 10px;
+  width: 100%;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+  margin-top: 8px;
+}
