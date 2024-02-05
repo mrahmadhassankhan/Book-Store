@@ -1,0 +1,19 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+.navbar {
+  display: flex;
+  align-items: center;
+  padding: 5px;
+  justify-content: space-between;
+  background-color: black;
+}
+.right-navbar {
+  margin-right: 20px;
+}
+.navbar-link {
+  color: white;
+  text-decoration: none;
+  margin-left: 20px;
+}
