@@ -10,7 +10,7 @@ const AddStudent = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     axios
-      .post("http://localhost:3001/student/addstudent", {
+      .post("http://localhost:3001/student/register", {
         username,
         password,
         rollno,

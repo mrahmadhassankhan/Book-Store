@@ -56,4 +56,21 @@ router.post("/login", async (req, res) => {
   }
 });
 
-module.exports = { router };
+const verifyAdmin = (req, res, next) => {
+  const token = req.cookies.token;
+  if (!token) {
+    res.json({ message: "Invalid Admin" });
+  } else {
+    Jwt.verify(token, process.env.ADMIN_KEY, (err, decoded) => {
+      if (err) {
+        return res.json({ message: "Invalid Token" });
+      } else {
+        req.username = decoded.username;
+        req.role = decoded.role;
+        next();
+      }
+    });
+  }
+};
+
+module.exports = { router, verifyAdmin };
