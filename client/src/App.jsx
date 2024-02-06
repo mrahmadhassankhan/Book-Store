@@ -6,6 +6,7 @@ import Login from "./components/Login";
 import Books from "./components/Books";
 import Dashboard from "./components/Dashboard";
 import AddStudent from "./components/AddStudent";
+import Logout from "./components/Logout";
 const App = () => {
   const [role, setRoleStatus] = useState("");
   return (
@@ -20,6 +21,10 @@ const App = () => {
         <Route path="/books" element={<Books />}></Route>
         <Route path="/dashboard" element={<Dashboard />}></Route>
         <Route path="/addstudent" element={<AddStudent />}></Route>
+        <Route
+          path="/logout"
+          element={<Logout setRoleStatus={setRoleStatus} />}
+        ></Route>
       </Routes>
     </BrowserRouter>
   );
