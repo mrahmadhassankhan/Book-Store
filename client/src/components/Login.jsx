@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "./css/Login.css";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-const Login = () => {
+const Login = ({ setRoleStatus }) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [role, setRole] = useState("");
@@ -13,10 +13,12 @@ const Login = () => {
       .post("http://localhost:3001/auth/login", { username, password, role })
       .then((res) => {
         if (res.data.login && res.data.role === "admin") {
+          setRoleStatus("admin");
           navigate("/dashboard");
         }
         if (res.data.login && res.data.role === "student") {
-          navigate("/dashboard");
+          setRoleStatus("student");
+          navigate("/");
         }
       })
       .catch((err) => console.error(err));
