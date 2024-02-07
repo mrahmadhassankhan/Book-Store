@@ -8,6 +8,7 @@ import Dashboard from "./components/Dashboard";
 import AddStudent from "./components/AddStudent";
 import Logout from "./components/Logout";
 import axios from "axios";
+import AddBook from "./components/AddBook";
 const App = () => {
   const [role, setRoleStatus] = useState("");
   axios.defaults.withCredentials = true;
@@ -40,6 +41,7 @@ const App = () => {
           path="/logout"
           element={<Logout setRoleStatus={setRoleStatus} />}
         ></Route>
+        <Route path="/addbook" element={<AddBook />}></Route>
       </Routes>
     </BrowserRouter>
   );

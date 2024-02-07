@@ -5,6 +5,7 @@ const cors = require("cors");
 const cookieParser = require("cookie-parser");
 const { router } = require("./routes/Auth");
 const { studentrouter } = require("./routes/Student.js");
+const { addBookRouter } = require("./routes/AddBook.js");
 const app = express();
 app.use(express.json());
 app.use(
@@ -18,6 +19,7 @@ dotenv.config();
 
 app.use("/auth", router);
 app.use("/student", studentrouter);
+app.use("/book", addBookRouter);
 app.listen(process.env.PORT, () => {
   console.log("Server is Running", process.env.PORT);
 });
