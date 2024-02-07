@@ -73,9 +73,37 @@ const verifyAdmin = (req, res, next) => {
   }
 };
 
+const verifyUser = (req, res, next) => {
+  const token = req.cookies.token;
+  if (!token) {
+    res.json({ message: "Invalid User" });
+  } else {
+    Jwt.verify(token, process.env.ADMIN_KEY, (err, decoded) => {
+      if (err) {
+        Jwt.verify(token, process.env.STUDENT_KEY, (err, decoded) => {
+          if (err) {
+            return res.json({ message: "Invalid Token" });
+          } else {
+            req.username = decoded.username;
+            req.role = decoded.role;
+            next();
+          }
+        });
+      } else {
+        req.username = decoded.username;
+        req.role = decoded.role;
+        next();
+      }
+    });
+  }
+};
+router.get("/verify", verifyUser, (req, res) => {
+  return res.json({ login: true, role: req.role });
+});
+
 router.get("/logout", (req, res) => {
   res.clearCookie("token");
-  return res.json({ Logout: true });
+  return res.json({ logout: true });
 });
 
 module.exports = { router, verifyAdmin };

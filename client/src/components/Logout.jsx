@@ -8,7 +8,7 @@ const Logout = ({ setRoleStatus }) => {
     axios
       .get("http://localhost:3001/auth/logout")
       .then((res) => {
-        if (res.data.Logout) {
+        if (res.data.logout) {
           setRoleStatus("");
           navigate("/");
         }

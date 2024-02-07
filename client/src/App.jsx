@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Home from "./components/Home";
 import Navbar from "./components/Navbar";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
@@ -7,8 +7,23 @@ import Books from "./components/Books";
 import Dashboard from "./components/Dashboard";
 import AddStudent from "./components/AddStudent";
 import Logout from "./components/Logout";
+import axios from "axios";
 const App = () => {
   const [role, setRoleStatus] = useState("");
+  axios.defaults.withCredentials = true;
+  useEffect(() => {
+    axios
+      .get("http://localhost:3001/auth/verify")
+      .then((res) => {
+        if (res.data.login) {
+          setRoleStatus(res.data.role);
+        } else {
+          setRoleStatus("");
+        }
+        console.log(res);
+      })
+      .catch((err) => console.log(err));
+  }, []);
   return (
     <BrowserRouter>
       <Navbar role={role} />

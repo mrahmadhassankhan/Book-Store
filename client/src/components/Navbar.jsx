@@ -10,14 +10,9 @@ const Navbar = ({ role }) => {
         </Link>
       </div>
       <div className="right-navbar">
-        {role === "student" && (
-          <>
-            <Link to="/books" className="navbar-link">
-              Books
-            </Link>
-          </>
-        )}
-
+        <Link to="/books" className="navbar-link">
+          Books
+        </Link>
         {role === "admin" && (
           <>
             <Link to="/addbook" className="navbar-link">
